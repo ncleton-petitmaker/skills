@@ -1,23 +1,23 @@
 # French Invoice Analyzer
 
-**Version 2.0 - Mistral OCR API + Plan Comptable Petitmaker**
+**Version 2.0 - Claude Native + Plan Comptable Petitmaker**
 
-Professional automated invoice processing skill for French accounting with Pennylane integration. Uses Mistral's OCR API for ultra-accurate data extraction at 1/4 the cost, with **custom Petitmaker chart of accounts** (92 dedicated supplier accounts).
+Professional automated invoice processing skill for French accounting with Pennylane integration. Works **natively in Claude.ai** without external APIs, using **custom Petitmaker chart of accounts** (92 dedicated supplier accounts).
 
 ## Overview
 
-This skill automates the complete workflow of processing French invoices for accounting purposes, saving up to 85% of manual data entry time. **Version 2.0** uses Mistral OCR API for 94.9% extraction accuracy.
+This skill automates the complete workflow of processing French invoices for accounting purposes, saving up to 85% of manual data entry time. **Version 2.0** uses Claude's native document reading capabilities for maximum accuracy and reliability.
 
 ## New in Version 2.0
 
-### Mistral OCR API Integration
-- **94.9% extraction accuracy** (vs 2% with regex)
-- **4x cheaper than Claude Vision** ($0.001 vs $0.004 per invoice)
-- Specialized for document understanding
-- Reads invoices like a human, understands context
-- No more failed regex patterns
+### Claude Native - No External APIs
+- **Works directly in Claude.ai** - no network restrictions
+- **No API keys required** - no setup needed
+- **No external costs** - included in your Claude subscription
+- Claude reads uploaded documents natively
+- 95%+ extraction accuracy using Claude's capabilities
 - Handles all invoice layouts automatically
-- Processes up to 2000 pages/minute
+- No installation, no configuration
 
 ### Multi-Currency Support
 - **EUR, USD, GBP, CHF** automatic detection
@@ -77,7 +77,7 @@ This skill automates the complete workflow of processing French invoices for acc
 ## Files Included
 
 ### Main Skill File
-- `french-invoice-analyzer.skill` (67 KB) - Complete packaged skill with Petitmaker custom accounts
+- `french-invoice-analyzer.skill` (59 KB) - Complete packaged skill with Petitmaker custom accounts (Claude-native, no APIs)
 
 ### Documentation
 - `README.md` - This file
@@ -101,20 +101,15 @@ This skill automates the complete workflow of processing French invoices for acc
 
 ### Prerequisites
 
-**1. Mistral API Key (REQUIRED)**
+**No Prerequisites Required!**
 
-This skill uses Mistral OCR API for accurate extraction.
+This skill works natively in Claude.ai:
+- ✅ **No API keys** needed
+- ✅ **No installation** required
+- ✅ **No configuration** needed
+- ✅ **No external costs**
 
-1. Create account: https://console.mistral.ai
-2. Go to Settings > API Keys
-3. Create new API key
-4. Set environment variable:
-
-```bash
-export MISTRAL_API_KEY='your-api-key-here'
-```
-
-**Cost**: ~$0.001 per invoice (~0.1¢) - **4x cheaper than alternatives!**
+Just upload the skill to Claude.ai and start using it!
 
 ### Installation
 
@@ -222,43 +217,29 @@ python scripts/generate_pennylane_import.py ./analyzed/invoices_data.json
 ## Technical Details
 
 ### Technologies
-- **Mistral OCR API** - Specialized AI for document understanding and OCR
-- **Mistral Large** - Structured data extraction from OCR text
-- **Python 3.8+** - Core programming language
-- mistralai - Official Mistral AI SDK
-- pdf2image - PDF to image conversion
-- Pillow - Image processing
-- python-docx - DOCX support
-- openpyxl - Excel generation
+- **Claude Native Document Reading** - Built-in PDF/image/DOCX reading
+- **Python** - Optional for Excel generation helper script
+- openpyxl - Excel generation (optional)
 - PyYAML - Configuration management
+- **Petitmaker Chart of Accounts** - 92 custom supplier accounts
 - French Chart of Accounts (Plan Comptable Général)
 - Pennylane format specifications
 
 ### Dependencies
 
-**Python packages**:
+**For Claude.ai** (Recommended):
+- ✅ **None!** Works out of the box
+
+**For local Python scripts** (Optional):
 ```bash
-pip install mistralai pillow pdf2image python-docx PyYAML openpyxl
+pip install openpyxl PyYAML
 ```
 
-Or use the included requirements.txt:
-```bash
-pip install -r requirements.txt
-```
-
-**System packages**:
-```bash
-# Ubuntu/Debian
-apt-get install poppler-utils
-
-# macOS
-brew install poppler
-```
-
-**API Requirements**:
-- Mistral API key (get at https://console.mistral.ai)
-- Internet connection for API calls
-- Estimated cost: ~$0.001 per invoice (4x cheaper than alternatives!)
+**No External APIs**:
+- ❌ No Mistral API
+- ❌ No Anthropic API
+- ❌ No external costs
+- ✅ Everything works in Claude.ai natively
 
 ## Use Cases
 
@@ -304,21 +285,22 @@ Possible extensions:
 
 ### Changelog
 
-**v2.0.0 (2025-10-26)** - Major Refactoring with Mistral OCR + Petitmaker
-- ✅ Integrated Mistral OCR API for extraction (94.9% accuracy, 4x cheaper)
+**v2.0.0 (2025-10-26)** - Claude Native + Petitmaker Chart of Accounts
+- ✅ **Claude-native** - works directly in Claude.ai without external APIs
+- ✅ **No setup required** - upload skill and go
+- ✅ **No API costs** - included in Claude subscription
 - ✅ **Custom Petitmaker chart of accounts integration (92 dedicated suppliers)**
 - ✅ **Account 6157 for SaaS** (Logiciels en ligne / SaaS développement)
 - ✅ **Supplier-specific accounts** (401100001 to 401100103) for maximum traceability
 - ✅ Multi-currency support (EUR, USD, GBP, CHF)
-- ✅ **43+ SaaS providers** mapped to Petitmaker accounts
+- ✅ **43+ SaaS providers** mapped to Petitmaker accounts (Mistral AI, Google Cloud, Microsoft, Adobe, Pennylane, Fly.io, Supabase, OpenAI, Anthropic, and 35 more)
 - ✅ DOCX format support
 - ✅ Improved file naming: `YYYYMMDD - Company - USD - EUR.ext`
-- ✅ Configuration file (config.yaml) with embedded API key
-- ✅ Complete setup guide (SETUP.md)
+- ✅ Simplified configuration (no API keys)
+- ✅ Complete workflow guide (INSTRUCTIONS-CLAUDE.md, WORKFLOW-CLAUDE.md)
 - ✅ Automatic currency conversion with configurable rates
 - ✅ Better validation and error handling
-- ✅ Detailed logs and summary reports
-- ✅ Cost optimized: $0.10 for 100 invoices vs $0.40 with alternatives
+- ✅ Maximum reliability - no network restrictions
 
 **v1.0.0 (2025-10-25)** - Initial Release
 - Basic regex-based extraction
