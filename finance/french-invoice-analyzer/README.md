@@ -1,8 +1,8 @@
 # French Invoice Analyzer
 
-**Version 2.0 - Mistral OCR API**
+**Version 2.0 - Mistral OCR API + Plan Comptable Petitmaker**
 
-Professional automated invoice processing skill for French accounting with Pennylane integration. Uses Mistral's OCR API for ultra-accurate data extraction at 1/4 the cost.
+Professional automated invoice processing skill for French accounting with Pennylane integration. Uses Mistral's OCR API for ultra-accurate data extraction at 1/4 the cost, with **custom Petitmaker chart of accounts** (92 dedicated supplier accounts).
 
 ## Overview
 
@@ -25,10 +25,12 @@ This skill automates the complete workflow of processing French invoices for acc
 - Configurable exchange rates
 - Both currencies displayed in file names
 
-### Enhanced SaaS/Cloud Classification
-- **15+ SaaS providers** recognized (Google Cloud, Microsoft, Adobe, Pennylane, Fly.io, Supabase, etc.)
-- Correct account 651 (Software licenses) instead of 6241 (Transport)
-- Intelligent supplier name matching
+### Custom Petitmaker Chart of Accounts
+- **92 dedicated supplier accounts** (401100001 to 401100103)
+- **Account 6157 - SaaS/Online Software Development** (custom Petitmaker account)
+- **43+ SaaS providers** automatically mapped (Mistral AI, Google Cloud, Microsoft, Adobe, Pennylane, Fly.io, Supabase, OpenAI, Anthropic, Cursor, Midjourney, Perplexity, Stripe, Paddle, and 29 more)
+- Each supplier has its own dedicated account (401100xxx) for maximum traceability
+- Intelligent supplier name matching from your Pennylane chart of accounts
 
 ### DOCX Support
 - Process Word document invoices (.docx)
@@ -75,7 +77,7 @@ This skill automates the complete workflow of processing French invoices for acc
 ## Files Included
 
 ### Main Skill File
-- `french-invoice-analyzer.skill` (63 KB) - Complete packaged skill for Claude.ai
+- `french-invoice-analyzer.skill` (67 KB) - Complete packaged skill with Petitmaker custom accounts
 
 ### Documentation
 - `README.md` - This file
@@ -89,9 +91,10 @@ This skill automates the complete workflow of processing French invoices for acc
 ### Embedded Resources (inside .skill file)
 - **SETUP.md** - Complete setup guide with API configuration
 - **SKILL.md** - Complete skill documentation
-- **Python scripts** (5 files) - Vision API extraction, validation, search, Pennylane generation
-- **Accounting references** (14 files) - Full PCG by class, rules, examples
-- **Configuration** (3 files) - config.yaml, .env.example, requirements.txt
+- **Python scripts** (5 files) - Mistral OCR extraction, validation, search, Pennylane generation
+- **Accounting references** (15 files) - Full PCG by class, rules, examples + **petitmaker-accounts.md**
+- **Configuration** (3 files) - config.yaml (with API key), .env.example, requirements.txt
+- **Supplier mapping** - supplier_mapping.json (92 Petitmaker suppliers)
 - **Excel template** (1 file)
 
 ## Quick Start
@@ -162,28 +165,45 @@ python scripts/generate_pennylane_import.py ./analyzed/invoices_data.json
 - `summary_report.txt` - Processing summary
 - `renamed_invoices/` - Renamed and organized invoices
 
-## Automatic Classification Examples
+## Automatic Classification Examples (Petitmaker Custom)
 
-| Supplier Type | Account | Label |
-|--------------|---------|-------|
-| **SaaS & Cloud** (NEW) | **651** | **Software licenses** |
-| Google Cloud, Workspace | 651 | Google services |
-| Microsoft 365, Azure | 651 | Microsoft subscriptions |
-| Adobe Creative Cloud | 651 | Adobe subscriptions |
-| Pennylane | 651 | Accounting software |
-| Fly.io, Vercel, Netlify | 651 | Cloud hosting |
-| Supabase | 651 | Database as a service |
-| GitHub, AWS, OVH | 651 | Dev & Cloud services |
-| Freepik | 651 | Image licenses |
-| EDF, Engie | 6061 | Energy |
-| Orange, SFR, Free | 6262 | Telecommunications |
-| Accountant, Lawyer | 6226 | Professional fees |
-| Restaurants | 6257 | Meals & entertainment |
-| Hotels | 6251 | Travel & accommodation |
-| Shipping companies | 6242 | Transport |
-| **Unrecognized** | **6288** | **Other expenses** |
+**92 dedicated supplier accounts with automatic classification!**
 
-**30+ automatic classifications** with enhanced SaaS/Cloud support!
+| Supplier | Supplier Account | Expense Account | Label |
+|----------|-----------------|-----------------|-------|
+| **SaaS & AI Tools** | **401100xxx** | **6157** | **SaaS/Online Software Development** |
+| MISTRAL AI | 401100012 | 6157 | Logiciels en ligne / SaaS |
+| GOOGLE CLOUD FRANCE | 401100024 | 6157 | Logiciels en ligne / SaaS |
+| Microsoft | 401100101/102 | 6157 | Logiciels en ligne / SaaS |
+| Adobe | 401100055 | 6157 | Logiciels en ligne / SaaS |
+| PENNYLANE | 401100065 | 6157 | Logiciels en ligne / SaaS |
+| SUPABASE | 401100014 | 6157 | Logiciels en ligne / SaaS |
+| Fly.io | 401100097 | 6157 | Logiciels en ligne / SaaS |
+| OpenAI | 401100036 | 6157 | Logiciels en ligne / SaaS |
+| ANTHROPIC | 401100037 | 6157 | Logiciels en ligne / SaaS |
+| CURSOR | 401100022 | 6157 | Logiciels en ligne / SaaS |
+| Midjourney | 401100034 | 6157 | Logiciels en ligne / SaaS |
+| Perplexity | 401100089 | 6157 | Logiciels en ligne / SaaS |
+| Stripe | 401100095 | 6157 | Logiciels en ligne / SaaS |
+| PADDLE | 401100032 | 6157 | Logiciels en ligne / SaaS |
+| ... | ... | 6157 | +29 other SaaS providers |
+| | | | |
+| **Travel & Transport** | **401100xxx** | **6251** | **Travel** |
+| Hôtels | 401100001 | 6251 | Voyages et déplacements |
+| SNCF | 401100026 | 6251 | Voyages et déplacements |
+| Taxi | 401100004 | 6251 | Voyages et déplacements |
+| Parking | 401100002 | 6251 | Voyages et déplacements |
+| | | | |
+| **Meals** | **401100xxx** | **6257** | **Receptions** |
+| Restaurants | 401100003/079 | 6257 | Réceptions |
+| | | | |
+| **Professional Services** | **401100xxx** | **6226** | **Honoraires** |
+| INTEK CENTER (Paie) | 401100057 | 6226 | Honoraires |
+| | | | |
+| **Other** | **401100xxx** | **6288** | **Other expenses** |
+| Unrecognized suppliers | 401 (generic) | 6288 | Autres charges |
+
+**Total: 92 automatic supplier classifications with dedicated accounts!**
 
 ## ROI (Return on Investment)
 
@@ -284,13 +304,16 @@ Possible extensions:
 
 ### Changelog
 
-**v2.0.0 (2025-10-26)** - Major Refactoring with Mistral OCR
+**v2.0.0 (2025-10-26)** - Major Refactoring with Mistral OCR + Petitmaker
 - ✅ Integrated Mistral OCR API for extraction (94.9% accuracy, 4x cheaper)
+- ✅ **Custom Petitmaker chart of accounts integration (92 dedicated suppliers)**
+- ✅ **Account 6157 for SaaS** (Logiciels en ligne / SaaS développement)
+- ✅ **Supplier-specific accounts** (401100001 to 401100103) for maximum traceability
 - ✅ Multi-currency support (EUR, USD, GBP, CHF)
-- ✅ Enhanced SaaS/Cloud provider classification (20+ providers)
+- ✅ **43+ SaaS providers** mapped to Petitmaker accounts
 - ✅ DOCX format support
 - ✅ Improved file naming: `YYYYMMDD - Company - USD - EUR.ext`
-- ✅ Configuration file (config.yaml) for customization
+- ✅ Configuration file (config.yaml) with embedded API key
 - ✅ Complete setup guide (SETUP.md)
 - ✅ Automatic currency conversion with configurable rates
 - ✅ Better validation and error handling
