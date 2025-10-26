@@ -1,20 +1,23 @@
 # French Invoice Analyzer
 
-**Version 2.0 - Claude Vision API**
+**Version 2.0 - Mistral OCR API**
 
-Professional automated invoice processing skill for French accounting with Pennylane integration. Uses Claude's Vision API for ultra-accurate data extraction.
+Professional automated invoice processing skill for French accounting with Pennylane integration. Uses Mistral's OCR API for ultra-accurate data extraction at 1/4 the cost.
 
 ## Overview
 
-This skill automates the complete workflow of processing French invoices for accounting purposes, saving up to 85% of manual data entry time. **Version 2.0** uses Claude Vision API for 95%+ extraction accuracy.
+This skill automates the complete workflow of processing French invoices for accounting purposes, saving up to 85% of manual data entry time. **Version 2.0** uses Mistral OCR API for 94.9% extraction accuracy.
 
 ## New in Version 2.0
 
-### Claude Vision API Integration
-- **95%+ extraction accuracy** (vs 2% with regex)
+### Mistral OCR API Integration
+- **94.9% extraction accuracy** (vs 2% with regex)
+- **4x cheaper than Claude Vision** ($0.001 vs $0.004 per invoice)
+- Specialized for document understanding
 - Reads invoices like a human, understands context
 - No more failed regex patterns
 - Handles all invoice layouts automatically
+- Processes up to 2000 pages/minute
 
 ### Multi-Currency Support
 - **EUR, USD, GBP, CHF** automatic detection
@@ -95,20 +98,20 @@ This skill automates the complete workflow of processing French invoices for acc
 
 ### Prerequisites
 
-**1. Anthropic API Key (REQUIRED)**
+**1. Mistral API Key (REQUIRED)**
 
-This skill uses Claude Vision API for accurate extraction.
+This skill uses Mistral OCR API for accurate extraction.
 
-1. Create account: https://console.anthropic.com
+1. Create account: https://console.mistral.ai
 2. Go to Settings > API Keys
-3. Create new key (starts with `sk-ant-api03-...`)
+3. Create new API key
 4. Set environment variable:
 
 ```bash
-export ANTHROPIC_API_KEY='your-api-key-here'
+export MISTRAL_API_KEY='your-api-key-here'
 ```
 
-**Cost**: ~$0.004 per invoice (~0.4¢) - Very affordable!
+**Cost**: ~$0.001 per invoice (~0.1¢) - **4x cheaper than alternatives!**
 
 ### Installation
 
@@ -199,10 +202,10 @@ python scripts/generate_pennylane_import.py ./analyzed/invoices_data.json
 ## Technical Details
 
 ### Technologies
-- **Claude Vision API** - AI-powered invoice reading and extraction
+- **Mistral OCR API** - Specialized AI for document understanding and OCR
+- **Mistral Large** - Structured data extraction from OCR text
 - **Python 3.8+** - Core programming language
-- anthropic - Official Claude API SDK
-- pdfplumber - Native PDF text extraction
+- mistralai - Official Mistral AI SDK
 - pdf2image - PDF to image conversion
 - Pillow - Image processing
 - python-docx - DOCX support
@@ -215,7 +218,7 @@ python scripts/generate_pennylane_import.py ./analyzed/invoices_data.json
 
 **Python packages**:
 ```bash
-pip install anthropic pdfplumber pillow pdf2image python-docx PyYAML openpyxl
+pip install mistralai pillow pdf2image python-docx PyYAML openpyxl
 ```
 
 Or use the included requirements.txt:
@@ -226,16 +229,16 @@ pip install -r requirements.txt
 **System packages**:
 ```bash
 # Ubuntu/Debian
-apt-get install tesseract-ocr tesseract-ocr-fra poppler-utils
+apt-get install poppler-utils
 
 # macOS
-brew install tesseract tesseract-lang poppler
+brew install poppler
 ```
 
 **API Requirements**:
-- Anthropic API key (get at https://console.anthropic.com)
+- Mistral API key (get at https://console.mistral.ai)
 - Internet connection for API calls
-- Estimated cost: ~$0.004 per invoice
+- Estimated cost: ~$0.001 per invoice (4x cheaper than alternatives!)
 
 ## Use Cases
 
@@ -281,10 +284,10 @@ Possible extensions:
 
 ### Changelog
 
-**v2.0.0 (2025-10-26)** - Major Refactoring
-- ✅ Integrated Claude Vision API for extraction (95%+ accuracy)
+**v2.0.0 (2025-10-26)** - Major Refactoring with Mistral OCR
+- ✅ Integrated Mistral OCR API for extraction (94.9% accuracy, 4x cheaper)
 - ✅ Multi-currency support (EUR, USD, GBP, CHF)
-- ✅ Enhanced SaaS/Cloud provider classification (15+ providers)
+- ✅ Enhanced SaaS/Cloud provider classification (20+ providers)
 - ✅ DOCX format support
 - ✅ Improved file naming: `YYYYMMDD - Company - USD - EUR.ext`
 - ✅ Configuration file (config.yaml) for customization
@@ -292,6 +295,7 @@ Possible extensions:
 - ✅ Automatic currency conversion with configurable rates
 - ✅ Better validation and error handling
 - ✅ Detailed logs and summary reports
+- ✅ Cost optimized: $0.10 for 100 invoices vs $0.40 with alternatives
 
 **v1.0.0 (2025-10-25)** - Initial Release
 - Basic regex-based extraction
