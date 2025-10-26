@@ -1,0 +1,11 @@
+# Git ignore for sensitive files
+.env
+*.env
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+analyzed/
+renamed_invoices/
+temp_*/
+*.log
